@@ -14,7 +14,8 @@ import unittest
 from unittest.mock import patch
 from src.functions import greet_name_age, \
                             math_operation,\
-                            prompt_name_greeting
+                            prompt_name_greeting,\
+                            grade_outcome
 
 
 
@@ -102,6 +103,54 @@ class TestFunctions(unittest.TestCase):
         # Assert
         self.assertEqual(expected, actual)
 
+    def test_grade_outcome_high_grade_a_plus(self):
+        # Arrange
+        grade = 100
+        expected = "A+"
+
+        low_edge = 91
+
+        # Act
+        actual = grade_outcome(grade)
+        edge_actual = grade_outcome(low_edge)
+
+        # Assert
+        self.assertEqual(expected, actual)
+        self.assertEqual(expected,edge_actual)
+
+    def test_grade_outcome_medium_grade_pass(self):
+        # Arrange
+        grade = 75
+        expected = "Pass"
+
+        low_edge = 50
+        high_edge = 90
+        
+        # Act
+        actual = grade_outcome(grade)
+        low_actual = grade_outcome(low_edge)
+        high_actual = grade_outcome(high_edge)
+
+        # Assert
+        self.assertEqual(expected, actual)
+        self.assertEqual(expected, low_actual, high_actual)
+
+    def test_grade_outcome_low_grade_fail(self):
+        #Arrange
+        grade = 40
+        expected = "Fail"
+        high_grade = 49
+
+        #Act
+        actual = grade_outcome(grade)
+        high_actual = grade_outcome(high_grade) 
+
+        #Assert
+        self.assertEqual(expected, actual)
+        self.assertEqual(expected, high_actual)
+
+        # Arrange, Act, and Assert
+        #self.assertEqual("Fail", grade_outcome (40))
     
 
 
